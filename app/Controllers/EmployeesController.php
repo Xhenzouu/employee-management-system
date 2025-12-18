@@ -13,22 +13,30 @@ class EmployeesController extends Controller
 
         $model = new EmployeeModel();
 
-        // Pagination config
-        $perPage = 15;
-        $page = $this->request->getVar('page') ?? 1;
+        // Get all employees
+        $employees = $model->findAll();
 
-        $employees = $model->paginate($perPage);
-        $pager = $model->pager;
-
-        // Build full name for display
+        // Build full name
         foreach ($employees as &$employee) {
-            $middle = $employee['middle_name'] ? $employee['middle_name'] . ' ' : '';
+            $middle = $employee['middle_name'] ? $employee['middle_name'][0] . '. ' : '';
             $employee['full_name'] = trim($employee['first_name'] . ' ' . $middle . $employee['last_name']);
         }
 
+        // Total employees
+        $totalEmployees = count($employees);
+
+        // Gender count
+        $genderCount = ['Male' => 0, 'Female' => 0, 'Other' => 0];
+        foreach ($employees as $employee) {
+            if (isset($genderCount[$employee['gender']])) {
+                $genderCount[$employee['gender']]++;
+            }
+        }
+
         $data = [
-            'employees' => $employees,
-            'pager'     => $pager,
+            'employees'      => $employees,
+            'totalEmployees' => $totalEmployees,
+            'genderCount'    => $genderCount,
         ];
 
         return view('employees/index', $data);

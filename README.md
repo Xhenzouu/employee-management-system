@@ -1,60 +1,79 @@
-# CodeIgniter 4 Framework
+# Employee Management System
 
-## What is CodeIgniter?
+A secure and responsive **Employee Management System** built with **CodeIgniter 4** for the Intermediate Programming (CodeIgniter) final project.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+This system demonstrates:
+- User authentication (login/logout with confirmation modal)
+- Full CRUD operations on employee records
+- Input validation
+- MySQL database integration
+- Dashboard with workforce metrics (total employees + gender distribution doughnut chart)
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## Default Login Credentials
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+- **Username**: `admin`
+- **Password**: `admin123`
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+## Quick Setup Instructions (Recommended – No Manual SQL Import Needed)
 
-## Important Change with index.php
+Follow these steps to run the project on XAMPP:
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+1. Copy the entire project folder to your XAMPP `htdocs` directory  
+   Example: `C:\xampp\htdocs\employee-management-system`
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+2. Open a terminal (Command Prompt or PowerShell) inside the project folder
 
-**Please** read the user guide for a better explanation of how CI4 works!
+3. Run this single command to automatically create the database tables and insert the admin user + sample employees:
 
-## Repository Management
+C:\xampp\php\php.exe spark migrate
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+4. Open your browser and go to:  
+http://localhost/employee-management-system/auth/login
 
-## Contributing
+5. Log in with:  
+- Username: `admin`  
+- Password: `password`
 
-We welcome contributions from the community.
+That's it! The system is ready to use with sample data and a populated dashboard.
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
+## Alternative Setup (Manual Import – Backup Option Provided)
 
-## Server Requirements
+I have also included the exported database file (`employees_db.sql`) in this submission for convenience.
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+If you prefer not to run the migration command:
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+1. Create a new database in phpMyAdmin (e.g., `employees_db`)
+2. Go to the **Import** tab and upload the provided `employees_db.sql` file
+3. (Optional) Update the `.env` file with your database name if needed
+4. Access the same URL: http://localhost/employee-management-system/auth/login
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+## Features
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+- Secure session-based authentication with route protection
+- Full CRUD operations (Create, Read, Update, Delete) for employees
+- Server-side form validation with error feedback
+- Responsive dark-themed dashboard using Bootstrap 5
+- Visual gender distribution using interactive doughnut chart (Chart.js)
+- Confirmation modals for logout and delete actions
+- Sample employee data pre-loaded for demonstration
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+## Tech Stack
+
+- CodeIgniter 4 (MVC framework)
+- PHP 8+
+- MySQL
+- Bootstrap 5 + Bootstrap Icons
+- Chart.js for dashboard charts
+
+## Project Structure Highlights
+
+- `app/Controllers/` – AuthController, EmployeesController
+- `app/Models/` – UserModel, EmployeeModel
+- `app/Views/employees/` – Dashboard, forms, and employee list
+- `app/Database/Migrations/` – Automatic table creation
+- `app/Database/Seeds/` – Admin user and sample data
+
+Thank you for reviewing this project!  
+Submitted by: [Your Full Name]  
+Date: December 18, 2025

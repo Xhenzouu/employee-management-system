@@ -17,7 +17,10 @@
         </div>
     <?php endif; ?>
 
-    <!-- Table Card -->
+    <!-- Include Dashboard Metrics -->
+    <?= $this->include('employees/layouts/dashboard_metrics') ?>
+
+    <!-- Employees Table -->
     <div class="card table-container shadow">
         <div class="card-body p-0">
             <div class="table-responsive">
@@ -46,17 +49,21 @@
                                     <td><?= esc($employee['height']) ?></td>
                                     <td><?= esc($employee['weight']) ?></td>
                                     <td><?= esc($employee['mobile_number']) ?></td>
-                                    <td class="text-truncate" style="max-width: 180px;" title="<?= esc($employee['city'] . ', ' . $employee['province']) ?>">
+                                    <td class="text-truncate" style="max-width: 180px;">
                                         <?= esc($employee['city'] . ', ' . $employee['province']) ?>
                                     </td>
                                     <td class="text-center">
                                         <a href="<?= base_url('employees/edit/' . $employee['id']) ?>" 
-                                           class="btn btn-sm btn-outline-warning text-dark fw-semibold me-1" title="Edit">
+                                           class="btn btn-sm btn-outline-warning text-dark me-1">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a href="<?= base_url('employees/delete/' . $employee['id']) ?>" 
-                                           class="btn btn-sm btn-outline-danger text-dark fw-semibold" title="Delete"
-                                           onclick="return confirm('Delete <?= esc($employee['full_name']) ?>?')">
+                                        <a href="#" 
+                                        class="btn btn-sm btn-outline-danger text-dark" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#deleteModal"
+                                        data-name="<?= esc($employee['full_name']) ?>"
+                                        data-url="<?= base_url('employees/delete/' . $employee['id']) ?>"
+                                        title="Delete">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </td>
@@ -71,20 +78,6 @@
                 </table>
             </div>
         </div>
-
-        <!-- Pagination -->
-        <?php if (isset($pager) && $pager->getPageCount() > 1): ?>
-            <div class="card-footer bg-light d-flex justify-content-between align-items-center py-3">
-                <div class="text-muted small">
-                    Showing <?= ($pager->getCurrentPageNumber() - 1) * 15 + 1 ?> to 
-                    <?= min($pager->getCurrentPageNumber() * 15, $pager->getTotal()) ?> 
-                    of <?= $pager->getTotal() ?> records
-                </div>
-                <div>
-                    <?= $pager->links() ?>
-                </div>
-            </div>
-        <?php endif; ?>
     </div>
 
 <?= $this->endSection() ?>

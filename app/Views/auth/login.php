@@ -107,12 +107,6 @@
                 </button>
             <?= form_close() ?>
 
-            <div class="text-center mt-4">
-                <p class="hint-text mb-0">
-                    <strong>Default credentials:</strong><br>
-                    Username: <code>admin</code> • Password: <code>admin123</code>
-                </p>
-            </div>
         </div>
     </div>
 
