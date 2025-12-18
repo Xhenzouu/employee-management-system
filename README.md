@@ -12,7 +12,7 @@ This system demonstrates:
 ## Default Login Credentials
 
 - **Username**: `admin`
-- **Password**: `admin123`
+- **Password**: `password`
 
 ## Quick Setup Instructions (Recommended – No Manual SQL Import Needed)
 
