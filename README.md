@@ -75,5 +75,4 @@ If you prefer not to run the migration command:
 - `app/Database/Seeds/` – Admin user and sample data
 
 Thank you for reviewing this project!  
-Submitted by: [Your Full Name]  
 Date: December 18, 2025
