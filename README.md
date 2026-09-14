@@ -1,78 +1,138 @@
-# Employee Management System
+# Employee Management System 🧑‍💼📊
 
-A secure and responsive **Employee Management System** built with **CodeIgniter 4** for the Intermediate Programming (CodeIgniter) final project.
+A web-based system for managing employee records, built on **CodeIgniter 4 (PHP)**. It provides authentication, full employee CRUD, a metrics-driven dashboard, and a dark theme UI.
 
-This system demonstrates:
-- User authentication (login/logout with confirmation modal)
-- Full CRUD operations on employee records
-- Input validation
-- MySQL database integration
-- Dashboard with workforce metrics (total employees + gender distribution doughnut chart)
+Designed for real-world HR/admin use, this system prioritizes:
 
-## Default Login Credentials
+- 🔐 Secure, filtered access to employee data
+- 🗂️ Clean CRUD management of employee records
+- 📊 At-a-glance metrics on the dashboard
+- 🌙 A comfortable dark theme UI
 
-- **Username**: `admin`
-- **Password**: `password`
+Current production version: **v1**
 
-## Quick Setup Instructions (Recommended – No Manual SQL Import Needed)
+🔗 **Live Demo:** _Not deployed yet — currently runs locally._
 
-Follow these steps to run the project on XAMPP:
+## 🌍 Project Overview
 
-1. Copy the entire project folder to your XAMPP `htdocs` directory  
-   Example: `C:\xampp\htdocs\employee-management-system`
+The Employee Management System gives admins a central place to log in, view key employee metrics on the home dashboard, and manage employee records — replacing manual, spreadsheet-based tracking with a proper CRUD-backed web app.
 
-2. Open a terminal (Command Prompt or PowerShell) inside the project folder
+## 🧩 Core Features
 
-3. Run this single command to automatically create the database tables and insert the admin user + sample employees:
+- 🔐 **Authentication** (`AuthController`, `AuthFilter`) — login-protected access
+- 🏠 **Dashboard with metrics** (`Home.php`) — overview stats on employees
+- 🧑‍💼 **Employee management** (`EmployeesController`, `EmployeeModel`) — full CRUD for employee records
+- 👤 **User accounts** (`UserModel`) for system login
+- 🌙 **Dark theme UI**
+- 🗄️ **Database schema included** — `employees_db.sql` for quick local setup
 
-C:\xampp\php\php.exe spark migrate
+## 🔄 Core Flow
 
+```
+Login (AuthController, protected by AuthFilter)
+        ↓
+   Dashboard / Metrics (Home.php)
+        ↓
+   Employees List (EmployeesController → EmployeeModel)
+        ↓
+   Create / Edit / Delete Employee Records
+```
 
-4. Open your browser and go to:  
-http://localhost/employee-management-system/auth/login
+## 📋 Database Schema Reference
 
-5. Log in with:  
-- Username: `admin`  
-- Password: `password`
+Schema is provided directly as `employees_db.sql`, alongside CodeIgniter migrations/seeds (`app/Database`). Core entities, based on the app's models:
 
-That's it! The system is ready to use with sample data and a populated dashboard.
+| Model | Description |
+|-------|--------------|
+| `UserModel` | System accounts used for login |
+| `EmployeeModel` | Employee records managed through the CRUD screens |
 
-## Alternative Setup (Manual Import – Backup Option Provided)
+## 🧱 System Architecture
 
-I have also included the exported database file (`employees_db.sql`) in this submission for convenience.
+```
+Browser
+   ↓
+CodeIgniter 4 Router → AuthFilter
+   ↓
+Controllers (Home, Auth, Employees)
+   ↓
+Models (User, Employee) → Database (employees_db.sql)
+   ↓
+Views (auth, employees) — Dark theme UI
+```
 
-If you prefer not to run the migration command:
+## 📁 Project Structure
 
-1. Create a new database in phpMyAdmin (e.g., `employees_db`)
-2. Go to the **Import** tab and upload the provided `employees_db.sql` file
-3. (Optional) Update the `.env` file with your database name if needed
-4. Access the same URL: http://localhost/employee-management-system/auth/login
+```
+employee-management-system/
+├── app/                    # Application code
+│   ├── Config/             # Framework & app configuration
+│   ├── Controllers/        # Auth, Employees, Home
+│   ├── Database/           # Migrations and seeds
+│   ├── Filters/            # AuthFilter
+│   ├── Models/             # EmployeeModel, UserModel
+│   ├── Views/              # auth, employees, errors
+│   └── Helpers/ Language/ Libraries/ ThirdParty/
+├── public/                 # Web root (index.php entry, assets)
+├── system/                 # CodeIgniter 4 framework core
+├── tests/                  # Test suite
+├── writable/               # Cache, logs, sessions, uploads, debugbar
+├── employees_db.sql        # Database schema/dump
+├── .env / env               # Environment configuration
+├── composer.json
+└── spark                   # CodeIgniter CLI tool
+```
 
-## Features
+## 🛠️ Tech Stack
 
-- Secure session-based authentication with route protection
-- Full CRUD operations (Create, Read, Update, Delete) for employees
-- Server-side form validation with error feedback
-- Responsive dark-themed dashboard using Bootstrap 5
-- Visual gender distribution using interactive doughnut chart (Chart.js)
-- Confirmation modals for logout and delete actions
-- Sample employee data pre-loaded for demonstration
+- **Framework:** CodeIgniter 4 (PHP)
+- **Architecture:** MVC (Controllers, Models, Views)
+- **Access Control:** CodeIgniter Filters (`AuthFilter`)
+- **Database:** MySQL (`employees_db.sql`), managed via CodeIgniter Migrations & Seeds
+- **UI:** Dark theme
+- **Dependency Management:** Composer
+- **CLI Tooling:** CodeIgniter Spark
+- **Version Control:** Git, GitHub
 
-## Tech Stack
+## ▶️ Running Locally
 
-- CodeIgniter 4 (MVC framework)
-- PHP 8+
-- MySQL
-- Bootstrap 5 + Bootstrap Icons
-- Chart.js for dashboard charts
+1. Clone the repo
+2. `cd employee-management-system`
+3. Install dependencies: `composer install`
+4. Create a database and import `employees_db.sql`
+5. Copy `env` to `.env` and configure your database credentials and base URL
+6. (Optional) Run any additional migrations/seeds: `php spark migrate` / `php spark db:seed <SeederName>`
+7. Start the development server: `php spark serve`
+8. Visit `http://localhost:8080` in your browser
 
-## Project Structure Highlights
+## 🚀 Future Roadmap
 
-- `app/Controllers/` – AuthController, EmployeesController
-- `app/Models/` – UserModel, EmployeeModel
-- `app/Views/employees/` – Dashboard, forms, and employee list
-- `app/Database/Migrations/` – Automatic table creation
-- `app/Database/Seeds/` – Admin user and sample data
+- ✅ Authentication with filtered access
+- ✅ Employee CRUD management
+- ✅ Dashboard with metrics
+- ✅ Dark theme UI
+- 🔜 Role-based access (admin vs. HR staff)
+- 🔜 Search and filtering on the employees list
+- 🔜 Exportable reports (CSV/PDF)
+- 🔜 Attendance or leave tracking module
 
-Thank you for reviewing this project!  
-Date: December 18, 2025
+## 🤝 Contributing
+
+Pull requests welcome! Please:
+
+- 🔒 Never commit `.env` or real employee data
+- 🧱 Keep new features within the standard CodeIgniter 4 MVC structure
+- 🛡️ Route any new protected pages through the existing `AuthFilter`
+- 🧪 Add tests under `tests/` for new controllers or models where practical
+
+## About
+
+A CodeIgniter 4 employee management system with authentication, full employee CRUD, a metrics dashboard, and a dark theme UI. 🧑‍💼📊
+
+### Topics
+
+`php` `codeigniter4` `mvc` `employee-management` `crud` `dashboard`
+
+---
+
+⭐ Stars · 👀 Watchers · 🍴 Forks
